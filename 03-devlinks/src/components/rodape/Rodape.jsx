@@ -1,10 +1,10 @@
 import styles from './Rodape.module.css'
 
-const Rodape = () => {
+const Rodape = ({children}) => {
   return (
    <footer>
     <p>
-        Feito com 🩵 por <a href="https://github.com">MeuNome</a>
+        Feito com 🩵 por <a href="https://github.com">{children}</a>
     </p>
    </footer>
   )
