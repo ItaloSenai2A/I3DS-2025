@@ -4,9 +4,8 @@ import Footer from "./components/footer/Footer";
 import MovieCard from "./components/movieCard/MovieCard";
 import Logo from "./assets/devflix.png";
 import Lupa from "./assets/search.svg";
-// import logo from 'https://placehold.co/200x200'
 
-function App() {
+const App = () => {
   const [search, setSearch] = useState("");
   const [movies, setMovies] = useState([]);
 
@@ -14,17 +13,17 @@ function App() {
   const apiKey = import.meta.env.VITE_OMDB_API_KEY;
   const apiUrl = `https://omdbapi.com/?apikey=${apiKey}`;
 
-  //Alimentando com dados para não ficar nulo
+  //Alimentando com dados para não ficar nulo com useEffect
   useEffect(() => {
     searchMovies("Batman");
   }, []);
 
-  //Criando a conexão com a API e trazendo informações
+  //criando a conexão com a API e trazendo informações
   const searchMovies = async (title) => {
     const response = await fetch(`${apiUrl}&s=${title}`);
     const data = await response.json();
 
-    //Alimentando o movies
+    //alimentando o movies
     setMovies(data.Search);
   };
 
@@ -39,48 +38,30 @@ function App() {
 
       <div className="search">
         <input
-        onKeyDown={handleKeyPress}
-        onChange={(e) => setSearch(e.target.value)}
-        type="text"
-        placeholder="Pesquise por filmes" 
+          onKeyDown={handleKeyPress}
+          onChange={(e) => setSearch(e.target.value)}
+          type="text"
+          placeholder="Pesquise por filmes"
         />
         <img onClick={() => searchMovies(search)} src={Lupa} alt="" />
       </div>
 
-    {movies?.length > 0 ? (
-      <div className="container">
-        {movies.map((movie, index) => (
-        <MovieCard key={index} {...movie} />
-      ))}
-      </div>
-    ) : (
-      <h2 className="empty">Filme não encontrado 😢</h2>
-    )}
-
-      {/* <MovieCard
-        Year={2024}
-        Type={"Movie"}
-        Title={"Batman"}
-        Poster={"https://placehold.co/300x444"}
-      />
-
-      <MovieCard
-        Year={2023}
-        Type={"Serie"}
-        Title={"Outer Banks"}
-        Poster={"https://placehold.co/300x444"}
-        description={
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec purus ut odio vehicula ultricies"
-        }
-        foto
-      /> */}
+      {movies?.length > 0 ? (
+        <div className="container">
+          {movies.map((movie, index) => (
+            <MovieCard key={index} apiUrl={apiUrl} {...movie} />
+          ))}
+        </div>
+      ) : (
+        <h2 className="empty">😢 Filme não encontrado 😢</h2>
+      )}
 
       <Footer
-        devName={"Ítalo"}
+        devName={" Ítalo Francesco"}
         devLink={"https://github.com/ItaloSenai2A"}
       />
     </div>
   );
-}
+};
 
 export default App;
