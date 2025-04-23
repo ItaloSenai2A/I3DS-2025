@@ -32,11 +32,21 @@ setCarrinhoItem((itemAnterior)=>{
     })
 }
 
+
+const handleRemoveCarrinho = (produto) => {
+  setCarrinhoItem((itemAnterior) => {
+   itemAnterior.filter((item) => item.id === produto.id);
+    
+  });
+}
+
   return (
     <>
       <Header contadorJogos={carrinhoItem.length} />
       <Promotion onAddCarrinho={handleAddCarinho} />
-      <CarrinhoOffCanvas />
+      <CarrinhoOffCanvas
+      onRemoveCarrinho={handleRemoveCarrinho}
+      carrinhoItem={carrinhoItem} />
     </>
   );
 }
