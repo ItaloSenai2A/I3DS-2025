@@ -71,7 +71,7 @@ const Promotion = (props) => {
 
   return (
     <div id="promotion" className="container w-75 my-5">
-      <h2 className="text-uppercase">Promoções</h2>
+      <h2 className="text-uppercase text-center text-md-start ms-md-5 ps-md-3 mb-4">Promoções</h2>
       <div
         id="itensPromo"
         className="d-flex flex-wrap gap-4 justify-content-between"
@@ -89,7 +89,7 @@ const Promotion = (props) => {
               preco={jogo.preco.toFixed(2)}
               desconto={jogo.desconto}
               imagem={jogo.imagem}
-              onAddCarrinho={props.onAddCarrinho} 
+              onAddCarrinho={() => props.onAddCarrinho(jogo)} // calback para acionar somente um item ao carrinho ao invés de todos
             />
           ))}
       </div>

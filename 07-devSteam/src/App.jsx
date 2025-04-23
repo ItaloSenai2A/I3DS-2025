@@ -4,7 +4,7 @@ import Header from "./components/Header";
 import Promotion from "./components/Promotion";
 
 function App() {
-  const [contador,setContador] = useState(3);
+  const [contador,setContador] = useState(0);
 
 
 const handleAddCarinho = () => {
